@@ -1,0 +1,23 @@
+import win.ui;
+import process;
+/*DSG{{*/
+mainForm = win.form(text="Launcher";right=959;bottom=591)
+mainForm.add(
+download={cls="button";text="下载";left=21;top=51;right=95;bottom=82;z=1};
+run={cls="button";text="启动游戏";left=782;top=504;right=950;bottom=566;z=3};
+static2={cls="static";text="游戏";left=22;top=19;right=103;bottom=48;transparent=1;z=2}
+)
+/*}}*/
+
+mainForm.run.oncommand = function(id,event){
+	
+}
+
+mainForm.download.oncommand = function(id,event){
+    var a = {}
+    a[0] = 1
+	process("download.exe",a)
+}
+
+mainForm.show();
+return win.loopMessage();
