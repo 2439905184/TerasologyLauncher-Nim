@@ -1,7 +1,6 @@
 import std/[asyncdispatch, httpclient]
 import std/json
 import std/os
-#import wNim
 import zippy/ziparchives
 
 type
@@ -13,11 +12,16 @@ type
     downloadInfos*: seq[DownloadInfo]
 
 proc download_jre*(version:string) = 
-  
-  discard
+  # 此处直接使用官方启动器的jre11版本
+  if version == "11":
+    var client = newHttpClient()
+    echo "开始下载jre11 请稍等..."
+    var content = client.getContent("https://download.bell-sw.com/java/11.0.16.1+1/bellsoft-jre11.0.16.1+1-windows-amd64.zip")
+    writefile("download/jre11.zip", content)
+    echo "下载完成"
 
 proc resolve_jre*(version:string) = 
-  var zip = "download/jre.zip"
+  var zip = "download/jre" & version & ".zip"
   echo "解压中..."
   extractAll(zip, "jre/" & version)
   echo "安装完成"
@@ -55,3 +59,7 @@ proc download_game*(version:string) =
   var client = newHttpClient()
   var content = client.getContent(url)
   writefile("games/" & version & "/TerasologyOmega.zip", content)
+
+proc install_game*(version:string) = 
+
+  discard
