@@ -2,6 +2,7 @@ import std/[asyncdispatch, httpclient]
 import std/json
 import std/os
 #import wNim
+import zippy/ziparchives
 
 type
   DownloadInfo* = object # 存储下载信息
@@ -11,21 +12,15 @@ type
     tag_name*, name*, published_at*: string
     downloadInfos: seq[DownloadInfo]
 
-# var versions = ["v5.0.0","v5.2.0"]
-# var sel_version = "0"
-# #waitFor asyncProc()
-# #asyncProc()
-# echo "下载中: " & url
-# echo "如果下载失败，请打开浏览器手动下载, https://ghproxy.com/"
-
-
-# proc download_jre*(frame:wFrame) = 
-#   #MessageDialog(frame, "Hello World", "MessageDialog").display()
-#   discard
-
-proc download_jre() = 
-
+proc download_jre*(version:string) = 
+  
   discard
+
+proc resolve_jre*(version:string) = 
+  var zip = "download/jre.zip"
+  echo "解压中..."
+  extractAll(zip, "jre/" & version)
+  echo "安装完成"
 
 proc asyncGet(url: string): Future[string] {.async.} =
   var client = newAsyncHttpClient()
@@ -50,8 +45,8 @@ proc getReleaseDatas(): seq[ReleaseData] =
                                 downloadInfos : downloadInfos))
   return releaseDatas
   
+# 此处使用github加速代理服务 如果下载失败，请打开浏览器手动下载, https://ghproxy.com/
 
-# 此处使用github加速代理服务
 proc download_game*(version:string) = 
   var url_first = "https://ghproxy.com/"
   var url = url_first & "https://github.com/MovingBlocks/Terasology/releases/download/" & version & "/TerasologyOmega.zip"
