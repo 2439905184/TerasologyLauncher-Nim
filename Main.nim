@@ -13,7 +13,7 @@ if params[0] == "init":
 if params[0] == "download_game":
   var version = params[1]
   createDir("download/" & version)
-  download_game(version)
+  waitFor download_game(version)
 
 if params[0] == "install_game":
   var version = params[1]
@@ -21,8 +21,8 @@ if params[0] == "install_game":
 
 if params[0] == "install_jre":
   var version = params[1]
-  download_jre(version)
-  resolve_jre(version)
+  #discard waitFor download_jre(version)
+  #resolve_jre(version)
 
 if params[0] == "run":
   var version = params[1]
