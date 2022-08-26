@@ -13,8 +13,9 @@ proc download_jre*(version:string) =
 
 proc resolve_jre*(version:string) = 
   var zip = "download/jre" & version & ".zip"
+  var outDir = "jre/" & version
   echo "解压中..."
-  extractAll(zip, "jre/" & version)
+  extractAll(zip, outDir)
   echo "安装完成"
 
 # 此处使用github加速代理服务 如果下载失败，请打开浏览器手动下载, https://ghproxy.com/
@@ -25,8 +26,12 @@ proc download_game*(version:string) =
   echo url
   var client = newHttpClient()
   var content = client.getContent(url)
-  writefile("games/" & version & "/TerasologyOmega.zip", content)
+  var file = "download/" & version & "/TerasologyOmega.zip"
+  writefile(file, content)
 
 proc install_game*(version:string) = 
-
-  discard
+  echo "开始安装游戏: " & version
+  var zip = "download/" & version & "/TerasologyOmega.zip"
+  var outDir = "games/" & version
+  extractAll(zip, outDir)
+  echo "游戏安装完成: " & version
