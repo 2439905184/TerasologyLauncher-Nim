@@ -8,6 +8,11 @@ proc setup_version(version:string) =
 
 var params = commandLineParams()
 
+if params[0] == "init":
+  createDir("download")
+  createDir("games")
+  createDir("jre")
+
 if params[0] == "download":
   var version = params[1]
   setup_version(version)
