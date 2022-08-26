@@ -29,8 +29,12 @@ if params[0] == "install_jre":
 
 if params[0] == "run":
   var version = params[1]
-  setCurrentDir("jre/11/jre-11.0.16.1/bin")
+  if version == "v5.2.0":
+    # setCurrentDir("jre/11/offical-java11/jre/bin")
+    discard execShellCmd("cd run &java.cmd")
+    #discard execShellCmd("java.exe -jar " & "../../../..games/" & version & "/Terasology.jar")
+  # setCurrentDir("jre/11/jre-11.0.16.1/bin")
   # var success = execShellCmd("java.exe -jar D:/work/myTerasologyLauncher/dist/games/" & version & "/libs/Terasology.jar")
-  var success = execShellCmd("java.exe -jar " & "../../../../games/" & version & "/libs/Terasology.jar")
-  if success == 0:
-    echo "游戏启动失败或者进程已结束！"
+  # var success = execShellCmd("java.exe -jar " & "../../../../games/" & version & "/libs/Terasology.jar")
+  # if success == 0:
+  #   echo "游戏启动失败或者进程已结束！"
