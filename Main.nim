@@ -1,5 +1,6 @@
 import std/os
 #import wNim
+import std/asyncdispatch
 import download
 
 
@@ -13,16 +14,18 @@ if params[0] == "init":
 if params[0] == "download_game":
   var version = params[1]
   createDir("download/" & version)
-  waitFor download_game(version)
+  download_game(version)
 
 if params[0] == "install_game":
   var version = params[1]
   install_game(version)
+if params[0] == "download_jre":
+  var version = params[1]
+  download_jre(version)
 
 if params[0] == "install_jre":
   var version = params[1]
-  #discard waitFor download_jre(version)
-  #resolve_jre(version)
+  install_jre(version)
 
 if params[0] == "run":
   var version = params[1]
