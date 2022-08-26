@@ -1,6 +1,6 @@
 import std/os
 #import wNim
-#import download
+import download
 import zippy/ziparchives
 
 proc setup_version(version:string) = 
@@ -19,7 +19,4 @@ if params[0] == "download":
 if params[0] == "install_jre":
   var version = params[1]
   #download_jre(version)
-  #resolve_jre(version)
-  echo "解压中..."
-  extractAll("download/jre.zip", "jre/11")
-  echo "安装完成"
+  resolve_jre(version)
