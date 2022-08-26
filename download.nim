@@ -1,6 +1,5 @@
 import std/[asyncdispatch, httpclient]
 import std/os
-import strformat
 import zippy/ziparchives
 
 proc download_jre*(version:string) = 
