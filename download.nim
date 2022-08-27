@@ -1,6 +1,14 @@
 import std/[asyncdispatch, httpclient]
 import std/json
 import std/os
+import std/strformat
+
+const fastgit_release = "MovingBlocks/Terasology/releases/download/"
+const github_release = "https://github.com/MovingBlocks/Terasology/releases/download/"
+var download_version = ""
+var proxy_fastgithub = "https://hub.fastgit.xyz/"
+var proxy_ghproxy* = "https://ghproxy.com/"
+var select_proxy = proxy_ghproxy #用户选择的代理 默认为ghproxy
 
 type
   DownloadInfo* = object # 存储下载信息
@@ -54,11 +62,18 @@ proc get_release_datas*(): seq[ReleaseData] =
                                 downloadInfos : download_infos))
   return release_datas
   
-# 此处使用github加速代理服务 如果下载失败，请打开浏览器手动下载, https://ghproxy.com/
+# 下载游戏
 proc download_game*(version:string) = 
-  var url_first = "https://ghproxy.com/"
-  var url = url_first & "https://github.com/MovingBlocks/Terasology/releases/download/" & version & "/TerasologyOmega.zip"
-  echo "正在下载请稍后..."
+  var url = ""
+  echo "开始下载游戏"
+  select_proxy = readfile("proxy.txt")
+  echo "你选择的代理为: " & select_proxy
+  if select_proxy == proxy_fastgithub:
+    url = select_proxy & fastgit_release & version & "/TerasologyOmega.zip"
+  if select_proxy == proxy_ghproxy:
+    url = select_proxy & github_release & version & "/TerasologyOmega.zip"
+  echo "正在下载: " & url
+
   var client = newHttpClient()
   client.onProgressChanged = onProgressChanged
   var content = client.getContent(url)
@@ -72,3 +87,20 @@ proc install_game*(version:string) =
   var outDir = "games/" & version
   var result = execShellCmd("Unpacker.exe " & zip & " " & outDir)
   echo "游戏安装完成: " & version
+
+proc write_proxy*(p_proxy:string) = 
+  writefile("proxy.txt", p_proxy)
+
+proc change_proxy*(proxy:string):bool = 
+  if proxy == "fastgithub":
+    select_proxy = proxy_fastgithub
+    echo "切换代理为:" & select_proxy
+    write_proxy(select_proxy)
+    return true
+  if proxy == "ghproxy":
+    select_proxy = proxy_ghproxy
+    echo "切换代理为:" & select_proxy
+    write_proxy(select_proxy)
+    return true
+  else:
+    return false

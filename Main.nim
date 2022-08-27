@@ -24,6 +24,12 @@ if params[0] == "init":
   createDir("download")
   createDir("games")
   createDir("jre")
+  write_proxy(proxy_ghproxy)
+
+if params[0] == "change_proxy":
+  var proxy = params[1]
+  var result = change_proxy(proxy)
+  if not result: echo "不存在此在线代理！"
 
 if params[0] == "download_game":
   var version = params[1]
