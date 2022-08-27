@@ -48,14 +48,23 @@ if params[0] == "install_jre":
   var version = params[1]
   install_jre(version)
 
+proc cant_run() = 
+  echo "此版本无法启动！"
+
+proc run(p_version:string) = 
+  setCurrentDir("games/" & p_version)
+  if execShellCmd("Terasology.x64.exe") == 0:
+    echo "无法运行或者进程已结束！"
+
 if params[0] == "run":
   var version = params[1]
-  if version == "v5.2.0":
-    # setCurrentDir("jre/11/offical-java11/jre/bin")
-    discard execShellCmd("cd run &java.cmd")
-    #discard execShellCmd("java.exe -jar " & "../../../..games/" & version & "/Terasology.jar")
-  # setCurrentDir("jre/11/jre-11.0.16.1/bin")
-  # var success = execShellCmd("java.exe -jar D:/work/myTerasologyLauncher/dist/games/" & version & "/libs/Terasology.jar")
-  # var success = execShellCmd("java.exe -jar " & "../../../../games/" & version & "/libs/Terasology.jar")
-  # if success == 0:
-  #   echo "游戏启动失败或者进程已结束！"
+  
+  if version == "v5.2.0": cant_run()
+  if version == "v4.3.0": cant_run()
+  if version == "v4.2.0": cant_run()
+  if version == "v3.2.0":  run(version)
+  if version == "v3.0.0": run(version)
+  if version == "v2.0.0": run(version)
+  if version == "v1.6.0": run(version)
+  if version == "v1.3.0": run(version)
+  
