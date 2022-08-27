@@ -31,6 +31,15 @@ proc download_jre*(version:string) =
     var content = client.getContent("https://download.bell-sw.com/java/11.0.16.1+1/bellsoft-jre11.0.16.1+1-windows-amd64.zip")
     writefile("download/jre11.zip", content)
     echo "下载完成"
+  if version == "8":
+    var url = "https://objects.githubusercontent.com/github-production-release-asset-2e65be/372924428/5c3e51b9-d2fb-4baf-9cf4-c6de7698a210?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220827%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220827T042433Z&X-Amz-Expires=300&X-Amz-Signature=d61468e10cd20d0b452f4f2b33f40ae533b849ec9b4b5b2a2e9344a59050b284&X-Amz-SignedHeaders=host&actor_id=29478722&key_id=0&repo_id=372924428&response-content-disposition=attachment%3B%20filename%3DOpenJDK8U-jre_x64_windows_hotspot_8u345b01.zip&response-content-type=application%2Foctet-stream"
+    var url2 = "https://download.bell-sw.com/java/8u345+1/bellsoft-jre8u345+1-windows-amd64.zip"
+    echo "开始下载jre8 请稍等..."
+    var client = newHttpClient()
+    client.onProgressChanged = onProgressChanged
+    var content = client.getContent(url2)
+    writefile("download/jre8.zip", content)
+    echo "下载完成"
 
 proc install_jre*(version:string) = 
   var zip = "download/jre" & version & ".zip"
