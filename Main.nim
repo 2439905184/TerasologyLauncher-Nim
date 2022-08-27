@@ -52,20 +52,28 @@ proc cant_run() =
   echo "此版本无法启动！"
 
 # 在这里启动游戏
-proc run(p_version:string) = 
-  #setCurrentDir("games/" & p_version)
-  if execShellCmd("jre/8/jre8u345/bin/java.exe -jar " & "games/" & version "/libs/Terasology.jar") == 0:
-    echo "无法运行或者进程已结束！"
+proc run(p_version:string,p_javaw:bool) = 
+  if p_javaw:
+    if execShellCmd("jre/8/jre8u345/bin/javaw.exe -jar " & "games/" & p_version & "/libs/Terasology.jar") == 0: echo "无法运行或者进程已结束！"
+  else:
+    setCurrentDir("games/" & p_version)
+    discard execShellCmd("Terasology.x64.exe")
+    #if execShellCmd("set path=" & ab & " &java -jar " & "games/" & p_version & "/libs/Terasology.jar") == 0: echo "无法运行或者进程已结束！"
 
 if params[0] == "run":
+  var use_javaw = false
   var version = params[1]
+  var java_type = params[2]
+
+  if java_type == "" or java_type == "java": use_javaw = false
+  if java_type == "javaw": use_javaw = true
   
   if version == "v5.2.0": cant_run()
   if version == "v4.3.0": cant_run()
   if version == "v4.2.0": cant_run()
-  if version == "v3.2.0":  run(version)
-  if version == "v3.0.0": run(version)
-  if version == "v2.0.0": run(version)
-  if version == "v1.6.0": run(version)
-  if version == "v1.3.0": run(version)
+  if version == "v3.2.0": run(version, use_javaw)
+  if version == "v3.0.0": run(version, use_javaw)
+  if version == "v2.0.0": run(version, use_javaw)
+  if version == "v1.6.0": run(version, use_javaw)
+  if version == "v1.3.0": run(version, use_javaw)
   
