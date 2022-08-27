@@ -51,9 +51,10 @@ if params[0] == "install_jre":
 proc cant_run() = 
   echo "此版本无法启动！"
 
+# 在这里启动游戏
 proc run(p_version:string) = 
-  setCurrentDir("games/" & p_version)
-  if execShellCmd("Terasology.x64.exe") == 0:
+  #setCurrentDir("games/" & p_version)
+  if execShellCmd("jre/8/jre8u345/bin/java.exe -jar " & "games/" & version "/libs/Terasology.jar") == 0:
     echo "无法运行或者进程已结束！"
 
 if params[0] == "run":
