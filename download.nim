@@ -34,19 +34,24 @@ proc download_jre*(version:string) =
   if version == "8":
     var url = "https://objects.githubusercontent.com/github-production-release-asset-2e65be/372924428/5c3e51b9-d2fb-4baf-9cf4-c6de7698a210?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220827%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220827T042433Z&X-Amz-Expires=300&X-Amz-Signature=d61468e10cd20d0b452f4f2b33f40ae533b849ec9b4b5b2a2e9344a59050b284&X-Amz-SignedHeaders=host&actor_id=29478722&key_id=0&repo_id=372924428&response-content-disposition=attachment%3B%20filename%3DOpenJDK8U-jre_x64_windows_hotspot_8u345b01.zip&response-content-type=application%2Foctet-stream"
     var url2 = "https://download.bell-sw.com/java/8u345+1/bellsoft-jre8u345+1-windows-amd64.zip"
+    var oracle_java8 = "https://sdlc-esd.oracle.com/ESD6/JSCDL/jdk/8u341-b10/424b9da4b48848379167015dcc250d8d/jre-8u341-windows-x64.exe?GroupName=JSC&FilePath=/ESD6/JSCDL/jdk/8u341-b10/424b9da4b48848379167015dcc250d8d/jre-8u341-windows-x64.exe&BHost=javadl.sun.com&File=jre-8u341-windows-x64.exe&AuthParam=1661583920_cebb5021fd2bf5b680b3a02b9111e114&ext=.exe"
+    echo "下载网站: " & oracle_java8 
     echo "开始下载jre8 请稍等..."
     var client = newHttpClient()
     client.onProgressChanged = onProgressChanged
-    var content = client.getContent(url2)
-    writefile("download/jre8.zip", content)
+    # 此版本jre无法运行游戏
+    var content = client.getContent(oracle_java8)
+    writefile("download/jre8.exe", content)
     echo "下载完成"
 
 proc install_jre*(version:string) = 
   var zip = "download/jre" & version & ".zip"
   var outDir = "jre/" & version
-  echo "解压中..."
-  discard execShellCmd("Unpacker.exe " & zip & " " & outDir)
-  echo "安装完成"
+  # echo "解压中..."
+  # discard execShellCmd("Unpacker.exe " & zip & " " & outDir)
+  # echo "安装完成"
+  setCurrentDir("download")
+  discard execShellCmd("jre8.exe")
 
 proc async_get(url: string): Future[string] {.async.} =
   var client = newAsyncHttpClient()
