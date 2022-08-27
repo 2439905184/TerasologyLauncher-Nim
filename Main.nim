@@ -53,13 +53,13 @@ proc cant_run() =
 
 # 在这里启动游戏
 proc run(p_version:string) = 
-  setCurrentDir("games/" & p_version)
-  discard execShellCmd("Terasology.x64.exe")
+  setCurrentDir("games/" & p_version & "/libs")
+  discard execShellCmd("Terasology.jar")
 
 if params[0] == "run":
   var use_javaw = false
   var version = params[1]
-  
+
   if version == "v5.2.0": cant_run()
   if version == "v4.3.0": cant_run()
   if version == "v4.2.0": cant_run()
