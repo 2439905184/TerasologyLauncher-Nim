@@ -1,0 +1,9 @@
+import console;
+import zlib;
+import zlib.unzip;
+
+console.setTitle("Unpacker");
+
+console.dump(_ARGV)
+zlib.unzip.extract(_ARGV[1],_ARGV[2])
+//console.pause()
