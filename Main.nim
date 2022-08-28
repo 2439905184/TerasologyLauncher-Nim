@@ -88,3 +88,8 @@ if params[0] == "list_installed":
 if params[0] == "uninstall_game":
   var version = params[1]
   uninstall_game(version)
+
+if params[0] == "remove_download":
+  var p_type = params[1]
+  var p_version = params[2]
+  remove_download(p_type, p_version)

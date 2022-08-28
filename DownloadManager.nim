@@ -110,3 +110,12 @@ proc change_proxy*(proxy:string):bool =
     return true
   else:
     return false
+
+proc remove_download*(p_type: string, version: string) = 
+  if p_type == "game":
+    removeDir("download/" & version)
+    echo "游戏: " & version & "移除完成"
+  if p_type == "jre":
+    if version == "8":
+      removeFile("download/" & "jre" & version & ".exe")
+      echo "java: " & version & "移除完成"
