@@ -17,4 +17,4 @@ jobs:
           path: 'nim'
           version: devel
           architecture: i386
-      - run: build.cmd
+      - run: .\build.cmd
