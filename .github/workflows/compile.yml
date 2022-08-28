@@ -1,0 +1,20 @@
+jobs:
+  on:
+    push:
+      branches: ["master","dev","actions"]
+  test:
+    name: Nim 32bit on Windows
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: egor-tensin/setup-mingw@v1
+        with:
+          platform: x86
+      - uses: alaviss/setup-nim@0.1.1
+        with:
+          path: 'nim'
+          version: devel
+          architecture: i386
+      - run: nimble test
+      - run: build.cmd
