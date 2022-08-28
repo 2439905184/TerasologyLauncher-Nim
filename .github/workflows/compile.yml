@@ -18,3 +18,7 @@ jobs:
           version: devel
           architecture: i386
       - run: .\build.cmd
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Main
+          path: dist/Main.exe
