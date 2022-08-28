@@ -1,8 +1,9 @@
 import std/os
 #import wNim
 import std/asyncdispatch
-import download
+import DownloadManager
 import GameManager
+
 var params = commandLineParams()
 if len(params) == 0:
   echo "错误，未输入参数！请输入help获取帮助！"
