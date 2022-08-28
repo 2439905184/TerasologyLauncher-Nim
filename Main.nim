@@ -1,7 +1,8 @@
 import std/os
 #import wNim
 import std/asyncdispatch
-import download
+import DownloadManager
+import GameManager
 
 var params = commandLineParams()
 if len(params) == 0:
@@ -80,4 +81,15 @@ if params[0] == "run":
   if version == "v2.0.0": run(version)
   if version == "v1.6.0": run(version)
   if version == "v1.3.0": run(version)
-  
+
+if params[0] == "list_installed":
+  list_installed()
+
+if params[0] == "uninstall_game":
+  var version = params[1]
+  uninstall_game(version)
+
+if params[0] == "remove_download":
+  var p_type = params[1]
+  var p_version = params[2]
+  remove_download(p_type, p_version)

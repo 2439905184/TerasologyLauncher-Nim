@@ -94,14 +94,6 @@ proc download_game*(version:string) =
   var file = "download/" & version & "/TerasologyOmega.zip"
   writefile(file, content)
 
-proc install_game*(version:string) = 
-  echo "开始安装游戏: " & version
-  echo "调用aardio的外部解压器！"
-  var zip = "download/" & version & "/TerasologyOmega.zip"
-  var outDir = "games/" & version
-  var result = execShellCmd("Unpacker.exe " & zip & " " & outDir)
-  echo "游戏安装完成: " & version
-
 proc write_proxy*(p_proxy:string) = 
   writefile("proxy.txt", p_proxy)
 
@@ -118,3 +110,12 @@ proc change_proxy*(proxy:string):bool =
     return true
   else:
     return false
+
+proc remove_download*(p_type: string, version: string) = 
+  if p_type == "game":
+    removeDir("download/" & version)
+    echo "游戏: " & version & "移除完成"
+  if p_type == "jre":
+    if version == "8":
+      removeFile("download/" & "jre" & version & ".exe")
+      echo "java: " & version & "移除完成"
