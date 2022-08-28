@@ -17,4 +17,4 @@ jobs:
           path: 'nim'
           version: devel
           architecture: i386
-      - run: nimble test
+      - run: build.cmd
