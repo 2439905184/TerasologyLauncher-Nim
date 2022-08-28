@@ -1,7 +1,7 @@
 name: windows build  
-  on:
-    push:
-      branches: ["master","dev","actions"]
+on:
+  push:
+    branches: ["master","dev","actions"]
 jobs:
   test:
     name: Nim 32bit on Windows
