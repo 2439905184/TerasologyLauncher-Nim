@@ -1,0 +1,24 @@
+name: windows build  
+on:
+  push:
+    branches: ["master","dev","actions"]
+jobs:
+  test:
+    name: Nim 32bit on Windows
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: egor-tensin/setup-mingw@v1
+        with:
+          platform: x86
+      - uses: alaviss/setup-nim@0.1.1
+        with:
+          path: 'nim'
+          version: devel
+          architecture: i386
+      - run: .\build.cmd
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Main
+          path: dist/Main.exe
