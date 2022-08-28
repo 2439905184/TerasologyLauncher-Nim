@@ -93,6 +93,7 @@ proc download_game*(version:string) =
   var content = client.getContent(url)
   var file = "download/" & version & "/TerasologyOmega.zip"
   writefile(file, content)
+  echo "下载完成"
 
 proc write_proxy*(p_proxy:string) = 
   writefile("proxy.txt", p_proxy)
