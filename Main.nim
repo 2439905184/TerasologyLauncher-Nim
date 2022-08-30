@@ -1,13 +1,16 @@
 import std/os
 #import wNim
 import std/asyncdispatch
+import std/strutils
 import std/json
+import system/io
 import DownloadManager
 import GameManager
 
 var params = commandLineParams()
 const OK = 0
 const Failed = 1
+const OfficalStablePath = "/games/OEMGA/STABLE/"
 
 if len(params) == 0:
   echo "错误，未输入参数！请输入help获取帮助！"
@@ -103,11 +106,13 @@ if params[0] == "install_offical":
   var to = ""
   if fileExists("offical.json"):
     var json = parseJson(readFile("offical.json"))
-    to = json["launcher"].getStr()
-    echo "开始缓存" & to
+    var rootDir = json["launcher"].getStr()
+    var targetDir = rootDir & OfficalStablePath & version.split("v")[1]
+    echo "开始缓存"
+    echo "要解压到：" & targetDir
     if unpack(version) == OK:
       echo "准备安装"
-      copyDir("cache/v2.0.0",r"D:\game\TerasologyLauncher-windows64\TerasologyLauncher-windows64-4.5.0\games\OMEGA\STABLE" & r"\" & version)
-      #install_offical(version, to)
+      copyDir("cache/" & version, targetDir)
+      removeDir("cache/" & version)
     else:
       echo "解压到缓存目录失败！"
