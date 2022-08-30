@@ -104,7 +104,7 @@ if params[0] == "install_offical":
     var json = parseJson(readFile("offical.json"))
     to = json["launcher"].getStr()
     echo "开始缓存" & to
-    if unpack(version) == 0:
+    if unpack(version) == OK:
       echo "准备安装"
       copyDir("cache/v2.0.0",r"D:\game\TerasologyLauncher-windows64\TerasologyLauncher-windows64-4.5.0\games\OMEGA\STABLE" & r"\" & version)
       #install_offical(version, to)
