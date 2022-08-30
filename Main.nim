@@ -7,6 +7,7 @@ import GameManager
 
 var params = commandLineParams()
 const OK = 0
+const Failed = 1
 
 if len(params) == 0:
   echo "错误，未输入参数！请输入help获取帮助！"
@@ -108,3 +109,5 @@ if params[0] == "install_offical":
       echo "准备安装"
       copyDir("cache/v2.0.0",r"D:\game\TerasologyLauncher-windows64\TerasologyLauncher-windows64-4.5.0\games\OMEGA\STABLE" & r"\" & version)
       #install_offical(version, to)
+    else:
+      echo "解压到缓存目录失败！"
