@@ -1,9 +1,9 @@
 # 使用Nim语言编写的第三方Terasology启动器 （命令行）
 默认只支持64位
 # 截图
-![截图](1.png)
+![截图](doc/1.png)
 # 游戏截图
-![游戏截图](2.png)
+![游戏截图](doc/2.png)
 # 编译
 1. 安装nim语言，mingw
 2. build.cmd
