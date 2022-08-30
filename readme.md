@@ -35,8 +35,8 @@ Main.exe change_proxy fastgithub
 ```
 下载安装java
 ```
-Main.exe download_game 8
-Main.exe install_game 8
+Main.exe download_jre 8
+Main.exe install_jre 8
 ```
 # 启动器支持的引擎版本
 v1.3.0 - v4.0.0
