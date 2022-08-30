@@ -1,4 +1,5 @@
 import os
+import Utils
 
 const downloadPath = "download/"
 const gamePath = "games/"
@@ -23,8 +24,20 @@ proc list_installed*() =
   echo "已安装的游戏:"
   for game in walkDir("games"):
     echo game.path
-# todo
-proc install_offical*(version: string, path: string) = 
-  echo "将游戏安装到官方启动器目录 用于解决疑难杂症"
 
-  echo ""
+proc unpack*(version: string): int = 
+  var zip = downloadPath & version & "/" & gameName
+  var exitCode = execShellCmd("Unpacker.exe " & zip & " " & "cache/" & version)
+  return exitCode
+
+# path是官方启动器根目录
+proc install_offical*(version: string, path: string) = 
+  echo "开始安装"
+  var zip = downloadPath & version & "/" & gameName
+  # 这么做是因为aardio unicode编码问题
+  var srcDir = "cache/" & version
+  var outDir = path
+  if dirExists("cache/" & version):
+    echo "缓存完毕，开始复制"
+    copyDir(srcDir,outDir & "/test")
+    echo "复制完毕"
