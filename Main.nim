@@ -44,6 +44,7 @@ if params[0] == "init":
   createDir("download")
   createDir("games")
   createDir("jre")
+  createDir("cache")
   write_proxy(proxy_ghproxy)
 
 if params[0] == "change_proxy":
