@@ -25,4 +25,6 @@ proc show_help*() =
   echo "例子: install_game v3.0.0 \n"
 
   echo "install_offical: 安装游戏到官方目录 你需要先设置offical.json中的内容"
-  echo "例子: install_offical v3.0.0"
+  echo "例子: install_offical v3.0.0 \n"
+  
+  echo "list_installed: 列出已安装的所有游戏"
