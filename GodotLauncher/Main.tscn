@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Alibaba-PuHuiTi-Regular.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://ss_2.jpg" type="Texture" id=5]
 [ext_resource path="res://gooey_star_64.png" type="Texture" id=6]
 [ext_resource path="res://PP.gd" type="Script" id=7]
+[ext_resource path="res://InstalledPanel.gd" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -25,6 +26,14 @@ expand = true
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="GameList" type="OptionButton" parent="."]
+margin_left = 813.0
+margin_top = 375.0
+margin_right = 987.0
+margin_bottom = 428.0
+custom_fonts/font = ExtResource( 4 )
+text = "游戏列表"
 
 [node name="Run" type="Button" parent="."]
 margin_left = 814.0
@@ -48,11 +57,11 @@ margin_top = 62.0
 margin_right = 158.0
 margin_bottom = 280.0
 
-[node name="GameSet" type="Button" parent="Left"]
+[node name="ListGame" type="Button" parent="Left"]
 margin_right = 158.0
 margin_bottom = 70.0
 custom_fonts/font = ExtResource( 4 )
-text = "3.0.0"
+text = "查看游戏"
 icon = ExtResource( 6 )
 
 [node name="Version" type="Button" parent="Left"]
@@ -316,7 +325,112 @@ size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
 text = "查看"
 
+[node name="InstalledPanel" type="Panel" parent="."]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.745098 )
+margin_right = 1042.0
+margin_bottom = 647.0
+script = ExtResource( 8 )
+
+[node name="VersionList" type="VBoxContainer" parent="InstalledPanel"]
+margin_left = 182.0
+margin_top = 55.0
+margin_right = 773.0
+margin_bottom = 347.0
+
+[node name="v1" type="HBoxContainer" parent="InstalledPanel/VersionList"]
+margin_right = 591.0
+margin_bottom = 70.0
+
+[node name="Button2" type="Button" parent="InstalledPanel/VersionList/v1"]
+margin_right = 527.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "3.2.0"
+icon = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="InstalledPanel/VersionList/v1"]
+margin_left = 531.0
+margin_top = 21.0
+margin_right = 591.0
+margin_bottom = 49.0
+custom_fonts/font = ExtResource( 4 )
+text = "未安装"
+
+[node name="v2" type="HBoxContainer" parent="InstalledPanel/VersionList"]
+margin_top = 74.0
+margin_right = 591.0
+margin_bottom = 144.0
+
+[node name="Button3" type="Button" parent="InstalledPanel/VersionList/v2"]
+margin_right = 527.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "2.0.0"
+icon = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="InstalledPanel/VersionList/v2"]
+margin_left = 531.0
+margin_top = 21.0
+margin_right = 591.0
+margin_bottom = 49.0
+custom_fonts/font = ExtResource( 4 )
+text = "未安装"
+
+[node name="v3" type="HBoxContainer" parent="InstalledPanel/VersionList"]
+margin_top = 148.0
+margin_right = 591.0
+margin_bottom = 218.0
+
+[node name="Button4" type="Button" parent="InstalledPanel/VersionList/v3"]
+margin_right = 527.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "1.6.0"
+icon = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="InstalledPanel/VersionList/v3"]
+margin_left = 531.0
+margin_top = 21.0
+margin_right = 591.0
+margin_bottom = 49.0
+custom_fonts/font = ExtResource( 4 )
+text = "未安装"
+
+[node name="v4" type="HBoxContainer" parent="InstalledPanel/VersionList"]
+margin_top = 222.0
+margin_right = 591.0
+margin_bottom = 292.0
+
+[node name="Button5" type="Button" parent="InstalledPanel/VersionList/v4"]
+margin_right = 527.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "1.3.0"
+icon = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="InstalledPanel/VersionList/v4"]
+margin_left = 531.0
+margin_top = 21.0
+margin_right = 591.0
+margin_bottom = 49.0
+custom_fonts/font = ExtResource( 4 )
+text = "未安装"
+
+[node name="Back" type="Button" parent="InstalledPanel"]
+margin_right = 89.0
+margin_bottom = 57.0
+custom_fonts/font = ExtResource( 4 )
+text = "<-"
+
+[connection signal="item_selected" from="GameList" to="." method="_on_GameList_item_selected"]
+[connection signal="pressed" from="GameList" to="." method="_on_GameList_pressed"]
 [connection signal="pressed" from="Run" to="." method="_on_Run_pressed"]
+[connection signal="pressed" from="Left/ListGame" to="." method="_on_ListGame_pressed"]
 [connection signal="pressed" from="Left/Downlaod" to="." method="_on_Downlaod_pressed"]
 [connection signal="pressed" from="Left2/GlobalSet" to="." method="_on_GlobalSet_pressed"]
 [connection signal="pressed" from="VersionPanel/Back" to="VersionPanel" method="_on_Back_pressed"]
@@ -324,3 +438,4 @@ text = "查看"
 [connection signal="pressed" from="Panel/Menu/Download" to="Panel" method="_on_Download_pressed"]
 [connection signal="pressed" from="Panel/Menu/Help" to="Panel" method="_on_Help_pressed"]
 [connection signal="pressed" from="Panel/Menu/About" to="Panel" method="_on_About_pressed"]
+[connection signal="pressed" from="InstalledPanel/Back" to="InstalledPanel" method="_on_Back_pressed"]
