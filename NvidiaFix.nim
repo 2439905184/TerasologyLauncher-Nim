@@ -12,7 +12,7 @@ proc recovery() =
   
   discard
 
-proc fix_crash() = 
+proc fix_crash*() = 
   backup()
   removeFile(nv1)
   removeFile(nv2)
