@@ -1,4 +1,5 @@
 import os
+import std/strutils
 import Utils
 
 const downloadPath = "download/"
@@ -23,7 +24,8 @@ proc uninstall_game*(version: string) =
 proc list_installed*() = 
   echo "已安装的游戏:"
   for game in walkDir("games"):
-    echo game.path
+    var p = game.path
+    echo p.split("games\\")[1]
 
 proc unpack*(version: string): int = 
   var zip = downloadPath & version & "/" & gameName
