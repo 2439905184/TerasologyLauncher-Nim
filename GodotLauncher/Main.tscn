@@ -36,13 +36,12 @@ custom_fonts/font = ExtResource( 4 )
 text = "游戏列表"
 
 [node name="Run" type="Button" parent="."]
-margin_left = 814.0
-margin_top = 516.0
-margin_right = 992.0
-margin_bottom = 598.0
+margin_left = 851.0
+margin_top = 512.0
+margin_right = 1003.0
+margin_bottom = 594.0
 custom_fonts/font = SubResource( 1 )
-text = "启动游戏 3.0.0"
-align = 0
+text = "启动游戏"
 
 [node name="Label2" type="Label" parent="."]
 margin_left = 5.0
