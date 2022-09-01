@@ -82,8 +82,12 @@ proc install_jre*(version:string) =
   #var zip = "download/jre" & version & ".zip"
   #var outDir = "jre/" & version
   setCurrentDir("download")
-  discard execShellCmd("jre8.exe")
-  echo "安装完成"
+  if version == "8":
+    if fileExists("jre8.exe"):
+      if execShellCmd("jre8.exe") == 0:
+        echo "安装完成"
+    else:
+      echo "错误！jre8未下载"
 
 proc async_get(url: string): Future[string] {.async.} =
   var client = newAsyncHttpClient()
