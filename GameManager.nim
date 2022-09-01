@@ -1,6 +1,5 @@
 import os
 import std/strutils
-import Utils
 
 const downloadPath = "download/"
 const gamePath = "games/"
@@ -27,6 +26,7 @@ proc list_installed*() =
     var p = game.path
     echo p.split("games\\")[1]
 
+# 先解压到缓存 再去复制
 proc unpack*(version: string): int = 
   var zip = downloadPath & version & "/" & gameName
   var exitCode = execShellCmd("Unpacker.exe " & zip & " " & "cache/" & version)

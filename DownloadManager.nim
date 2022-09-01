@@ -1,11 +1,10 @@
 import std/[asyncdispatch, httpclient]
 import std/json
 import std/os
-import std/strformat
+#import std/strformat
 
 const fastgit_release = "MovingBlocks/Terasology/releases/download/"
 const github_release = "https://github.com/MovingBlocks/Terasology/releases/download/"
-var download_version = ""
 var proxy_fastgithub = "https://hub.fastgit.xyz/"
 var proxy_ghproxy* = "https://ghproxy.com/"
 const lanzou_api1 = "https://www.youwk.cn/api/lanzou"
