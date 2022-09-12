@@ -14,31 +14,23 @@ func go_TerasologyLauncherNim():
 	pass
 
 func _on_About_pressed():
-	$Panel/OssDep.show()
-	$Panel/Help.hide()
-	$Panel/Mirror.hide()
-	pass
+	switch_show($Panel/OssDep)
 
 func _on_Help_pressed():
-	$Panel/Help.show()
-	$Panel/OssDep.hide()
-	$Panel/Mirror.hide()
-	pass
+	switch_show($Panel/Help)
 
 func _on_Download_pressed():
-	$Panel/Mirror.show()
-	$Panel/OssDep.hide()
-	$Panel/Help.hide()
+	switch_show($Panel/Mirror)
 	pass
 	
 # 用于重构的切换显示函数，一次只能切换显示一个节点
-func switch_show(node):
-	var all_node = [$Panel/Help,$Panel/Mirror,$Panel/OssDep]
-	for iter in node:
-		
-		pass
+func switch_show(p_node):
+	var all_node = [$Panel/Help,$Panel/Mirror,$Panel/OssDep,]
+	for node in all_node:
+		p_node.show()
+		if node != p_node:
+			node.hide()
 	pass
 
 func _on_Back_pressed():
 	self.hide()
-	pass

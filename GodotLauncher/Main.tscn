@@ -23,9 +23,6 @@ margin_right = 1046.0
 margin_bottom = 654.0
 texture = ExtResource( 5 )
 expand = true
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="GameList" type="OptionButton" parent="."]
 margin_left = 813.0

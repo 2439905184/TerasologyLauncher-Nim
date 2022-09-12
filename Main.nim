@@ -1,6 +1,6 @@
 import std/os
 #import wNim
-import std/asyncdispatch
+#import std/asyncdispatch
 import std/strutils
 import std/json
 import system/io
@@ -57,7 +57,7 @@ proc run(p_version:string) =
   discard execShellCmd("Terasology.jar")
 
 if params[0] == "run":
-  var use_javaw = false
+  #var use_javaw = false
   var version = params[1]
 
   if version == "v5.2.0": cant_run()
@@ -83,7 +83,6 @@ if params[0] == "remove_download":
 
 if params[0] == "install_offical":
   var version = params[1]
-  var to = ""
   if fileExists("offical.json"):
     var json = parseJson(readFile("offical.json"))
     var rootDir = json["launcher"].getStr()
